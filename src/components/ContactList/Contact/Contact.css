@@ -1,0 +1,11 @@
+li.contact-wrapper{
+    background-color: rgba(97, 218, 251, 0.48);
+    border: 1px solid rgba(97, 218, 251, 0.48);
+    margin: 5px;
+    width: 50%;
+}
+
+a:link{
+    color: black;
+    text-decoration: none;
+}

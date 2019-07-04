@@ -1,0 +1,24 @@
+span.msg-box{
+    margin: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
+div.text-wrapper{
+    background-color: #61dafb;
+    border-radius: 100px;
+    height: 50px;
+    width: 95%;
+}
+div.user-pic{
+    background-color: wheat;
+    border-radius: 25px;
+    height: 50px;
+    width: 50px;
+    font-size: small;
+}
+
+div.text{
+    padding: 10px;
+}
+
+
