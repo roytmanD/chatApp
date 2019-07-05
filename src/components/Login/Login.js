@@ -1,33 +1,56 @@
+//libs
 import React from 'react';
+import $ from 'jquery';
+
+const BASE_URL = 'http://localhost:3000/chatapp/api';
+
 
 
 class Login extends React.Component{
+constructor(props){
+    super(props);
+}
 
+    auth = (username) => {
+    this.props.auth(username)
+    }
 
-    logIn(){
+    logIn = () =>{
         const usernameInput = document.querySelector('#username').value;
         const pwdInput = document.querySelector('#password').value;
-        const q = {
-                username: usernameInput,
-                password: pwdInput
-        };
+       const url = `${BASE_URL}/users/auth?username=${usernameInput}&password=${pwdInput}`;
+
+        console.log(url);
+        fetch(url).then(res => res.text().then(authStatus=>{
+            if(authStatus==="SUCCESS"){
+                alert('Welcome!');
+                sessionStorage.setItem('authStatus', 'AUTH');
+                sessionStorage.setItem('currUser', usernameInput);
+
+                this.auth(usernameInput);
+            }else{
+                alert("Invalid username or password!");
+            }
+        }))
 
     }
 
+
     render() {
+
         return(
-            <form className='login-form'>
+            <div className='login-form'>
                 <h1>Join chat</h1>
 
-                <formGroup>
+                <div>
                     <label>Username</label>
                     <input  id='username' type='text' placeholder='Username'/>
-                </formGroup>
+                </div>
 
-                <formGroup>
+                <div>
                     <label>Password</label>
                     <input id='password' type='password' placeholder='Password'/>
-                </formGroup>
+                </div>
 
                 <button onClick={this.logIn} >Log in</button>
                 <div className='text-center'>
@@ -35,7 +58,7 @@ class Login extends React.Component{
                     <a href='/sign-up'>Sign up</a>
                     <span className='p-2'></span>
                 </div>
-            </form>
+            </div>
         );
     }
 

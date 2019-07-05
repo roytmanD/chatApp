@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 //stylesheet
 import "./Contact.css";
 
@@ -8,11 +9,18 @@ class Contact extends  React.Component{
         super(props);
     }
 
+    toChatRoom = () =>{
+
+        this.props.onContactClick( this.props.contact);
+    }
+
 
     render() {
+
+        console.log(this.props);
         return (
             <li className='contact-wrapper'>
-                <a onClick={this.props.onContactClick} href="#" className='contact-name'>{this.props.contact}</a>
+                <div onClick={this.toChatRoom} className='contact-name'>{this.props.contact}</div>
             </li>
         );
     }
