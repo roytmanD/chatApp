@@ -1,3 +1,6 @@
+//stylesheet
+import "./Chat.css";
+//libs
 import React from "react";
 import io from "socket.io-client";
 import uuid from 'uuid';
@@ -36,6 +39,10 @@ class Chat extends React.Component{
             this.setState({message: ''});
 
         }
+         this.handleBack = () =>{
+            this.props.back();
+        }
+
     }
     render(){
 
@@ -43,16 +50,26 @@ class Chat extends React.Component{
         return (
             <div className="container">
                 <div className="row">
+                    <div className="card-header">
+                    <button onClick={this.handleBack}>Back</button>
                     <p>My socket ID: {this.socket.id}</p>
                     <div className="col-4">
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-title">Chat with {this.props.companion}</div>
+                            </div>
                                 <hr/>
                                 <div className="messages">
                                     {this.state.messages.map(message => {
                                         return (
-                                            <div key={uuid()}>{message.author}: {message.message}</div>
+                                            <div
+                                                className={this.props.currUser === message.author ? 'myMessage' : 'message'}
+                                                key={uuid()}>
+                                                {this.props.currUser === message.author ?
+                                                    `${message.author} : ${message.message}` :
+                                                    `${message.message} : ${message.author}` }
+                                                {/*{message.author}: {message.message}*/}
+                                            </div>
                                         )
                                     })}
                                 </div>
@@ -61,9 +78,9 @@ class Chat extends React.Component{
                             <div className="card-footer">
                                 {/*<input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>*/}
                                 <br/>
-                                <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
+                                <input type="text" placeholder="Message" className="msg-input" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
                                 <br/>
-                                <button onClick={this.sendMessage} className="btn btn-primary form-control">Send</button>
+                                <button onClick={this.sendMessage} className="btn-send">Send</button>
                             </div>
                         </div>
                     </div>

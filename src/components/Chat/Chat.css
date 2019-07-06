@@ -1,0 +1,59 @@
+
+div.myMessage, div.message{
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    border-radius: 50px;
+    background-color: #f5f5f5;
+    margin: 10px;
+    padding: 5px;
+    width: fit-content;
+    font-size: 25pt;
+}
+
+/*div.myMessage{*/
+    /*border: 1px solid rgba(0, 0, 0, 0.24);*/
+    /*border-radius: 50px;*/
+    /*background-color: #f5f5f5;*/
+    /*margin: 10px;*/
+    /*padding: 5px;*/
+    /*width: fit-content;*/
+/*}*/
+div.message{
+    /*border: 1px solid rgba(0, 0, 0, 0.24);*/
+    /*border-radius: 50px;*/
+    /*background-color: #f5f5f5;*/
+    /*margin: 10px;*/
+    /*padding: 5px;*/
+    /*text-align: end;*/
+    /*width: fit-content;*/
+    float: right;
+}
+
+input.msg-input{
+    margin-bottom: 0;
+    height: 50px;
+    font-size: 25pt;
+}
+
+div.messages{
+    height: 500px;
+    overflow-y: scroll;
+    /*background-color: whitesmoke;*/
+    background-color: white;
+}
+
+button.btn-send{
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20pt;
+}
+
+div.card-footer, div.card-header{
+    background-color: #f2f2f2;
+    border: 2px solid #8e8e8e;
+}
+
+div.card-footer{
+    /*position: fixed;*/
+    width: 100%;
+}
+

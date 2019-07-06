@@ -19,6 +19,10 @@ class ContactList extends  React.Component{
         this.state = {contacts:contacts}
     }
 
+    handleSignOut = () =>{
+        this.props.signOut();
+    }
+
 componentDidMount() {
     const url = "http://localhost:3000/chatapp/api/users";
     fetch(url).then(res=>res.json()).then(jsonResponse =>{
@@ -31,6 +35,7 @@ componentDidMount() {
     render() {
         return (
             <div className="contact-list-wrapper">
+                <button onClick={this.handleSignOut}>Sing out</button>
                 <ul className='contact-list'>
                     {this.state.contacts.map(contact=>{
                         return <Contact onContactClick={this.props.toChatRoom} key={uuid()} contact={contact}/>

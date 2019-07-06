@@ -28,7 +28,16 @@ constructor(props){
     }
 
     onAuth = (username) => {
-    this.setState({mode: 'CONTACT-LIST', currUser: username});// TODO temp yet. //possibly need to store username in state
+    this.setState({mode: 'CONTACT-LIST', currUser: username});
+    }
+
+    onSignOut = () => {
+    sessionStorage.clear();
+    this.setState({mode: "NON-AUTH", currUser: null});
+    }
+
+    backToContacts = () => {
+    this.setState({mode: 'CONTACT-LIST', chatWith: null});
     }
 
   render() {
@@ -56,14 +65,14 @@ constructor(props){
 
         case 'CONTACT-LIST':
             return (
-                <ContactList toChatRoom={e => this.onContactClick(e)}/>
+                <ContactList signOut={this.onSignOut} toChatRoom={e => this.onContactClick(e)}/>
             );
 
             break;
 
         case "CHAT-ROOM":
             return(
-                <Chat companion={this.state.chatWith} currUser={this.state.currUser}/>
+                <Chat companion={this.state.chatWith} currUser={this.state.currUser} back={this.backToContacts}/>
             );
             break;
 
