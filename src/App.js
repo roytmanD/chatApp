@@ -61,20 +61,16 @@ constructor(props){
                     </div>
                 </Router>
             );
-            break;
 
         case 'CONTACT-LIST':
             return (
                 <ContactList signOut={this.onSignOut} toChatRoom={e => this.onContactClick(e)}/>
             );
 
-            break;
-
         case "CHAT-ROOM":
             return(
                 <Chat companion={this.state.chatWith} currUser={this.state.currUser} back={this.backToContacts}/>
             );
-            break;
 
         default:
 

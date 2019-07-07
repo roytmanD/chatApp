@@ -1,6 +1,6 @@
 ///RDB
-var redis = require('redis');
-var client = redis.createClient();
+const redis = require('redis');
+const client = redis.createClient();
 
 client.on('connect', function() {
     console.log('connected');
@@ -8,14 +8,12 @@ client.on('connect', function() {
 //RDB
 
 
-//same with express.js
-
 const express = require('express');
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
 
 //to solve corse
-var cors = require('cors');
+const cors = require('cors');
 app.use(cors());
 
 
@@ -31,15 +29,18 @@ app.get('/chatapp/api/users', (request, response)=>{
     });
 })
 
+// //add msg to list in db
+// app.post('/chatapp/api/messages', (request,response) =>{
+//
+//     const {message} = request.query;
+//     client.selected_db(1);
+//     client.rpush('messages', message);
+// })//todo later
+
 
 
 //auth
 app.get(`/chatapp/api/users/auth`, (request, response) => {
-
-
-console.log(request.query);
-
-
 
 const {username, password} = request.query;
 
@@ -47,10 +48,11 @@ const {username, password} = request.query;
         if(err){
             console.log(err);
         }else {
-            console.log('huy');
-            console.log(res);
-            if(res === password)
+            if(res === password){
             response.send("SUCCESS");
+            }else{
+                response.send("FAIL");
+            }
         }
     })
 
@@ -58,20 +60,31 @@ const {username, password} = request.query;
 
 });
 
-/*
-app.post('/chatapp/api/users/new/:usrnm/:pwd', (request, response)=>{
-    const username = request.params.username;
-    const password = request.params.password; //TODO dont forget to hash this later
-    client.set(username, password);
-    console.log(response);
+app.post('/chatapp/api/users/new', (request, response)=>{
+
+    const {username, password} = request.query;
+
+    client.get(username , (err,res)=>{
+        if (err){
+            console.log(err);
+        }
+        if(res === null){
+            client.set([username, password]);
+            response.send('SUCCESS');
+        }else{
+            response.send('FAIL. TOKEN EXISTS');
+        }
+    })
+
+
 })
-*/
+
 
 app.listen(port, (err) =>{
     if(err){
-        return console.log('hit happens and seems like it just did', err)
+        return console.log('Server error', err)
     }
 
     console.log(`all good listening port ${port}`);
-})
+});
 

@@ -1,6 +1,4 @@
-//libs
 import React from 'react';
-import $ from 'jquery';
 
 const BASE_URL = 'http://localhost:3000/chatapp/api';
 
@@ -20,7 +18,6 @@ constructor(props){
         const pwdInput = document.querySelector('#password').value;
        const url = `${BASE_URL}/users/auth?username=${usernameInput}&password=${pwdInput}`;
 
-        console.log(url);
         fetch(url).then(res => res.text().then(authStatus=>{
             if(authStatus==="SUCCESS"){
                 alert('Welcome!');

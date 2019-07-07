@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import uuid from 'uuid';
 
 //myComponents
@@ -8,15 +7,10 @@ import Contact from './Contact/Contact';
 //styleSheet
 import "./ContactList.css";
 
-const contacts = [
-    'Mum', 'Dad', 'Pizza', 'Food delivery', 'Plumber',
-    'Friend1', 'Friend2','Friend3', 'Friend4', 'Friend5', 'Friend6'
-];//HC yet
-
 class ContactList extends  React.Component{
     constructor(props){
         super(props);
-        this.state = {contacts:contacts}
+        this.state = {contacts:[]}
     }
 
     handleSignOut = () =>{

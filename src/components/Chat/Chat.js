@@ -5,9 +5,6 @@ import React from "react";
 import io from "socket.io-client";
 import uuid from 'uuid';
 
-
-//var username = 'miki'; // TODO HC YET BUT SHOULD GO FROM SESSION STORAGE AT LEAST
-//var companion = 'johnny'; //HC TOO should be not
 class Chat extends React.Component{
     constructor(props){
         super(props);
@@ -25,9 +22,9 @@ class Chat extends React.Component{
         });
 
         const addMessage = data => {
-            console.log(data);
+        //todo| this is a place to save the new msg to Redis db.
+
             this.setState({messages: [...this.state.messages, data]});
-            console.log(this.state.messages);
         };
 
         this.sendMessage = ev => {
@@ -45,8 +42,7 @@ class Chat extends React.Component{
 
     }
     render(){
-
-        console.log(this.props.companion);
+        
         return (
             <div className="container">
                 <div className="row">
@@ -68,7 +64,6 @@ class Chat extends React.Component{
                                                 {this.props.currUser === message.author ?
                                                     `${message.author} : ${message.message}` :
                                                     `${message.message} : ${message.author}` }
-                                                {/*{message.author}: {message.message}*/}
                                             </div>
                                         )
                                     })}
@@ -76,9 +71,8 @@ class Chat extends React.Component{
 
                             </div>
                             <div className="card-footer">
-                                {/*<input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>*/}
                                 <br/>
-                                <input type="text" placeholder="Message" className="msg-input" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
+                                <input type="text" placeholder="Message" className="msg-input" value={this.state.message} onChange={ev =>  this.setState({message: ev.target.value})}/>
                                 <br/>
                                 <button onClick={this.sendMessage} className="btn-send">Send</button>
                             </div>
